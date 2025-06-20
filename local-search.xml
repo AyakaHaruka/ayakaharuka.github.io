@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>RSA 基本概念</title>
+    <link href="/Crypto/RSA/"/>
+    <url>/Crypto/RSA/</url>
+    
+    <content type="html"><![CDATA[<p>RSA 是一种非对称加密算法，其安全性基于大整数分解的难度。RSA 算法由 Ron Rivest 、Adi Shamir 和 Leonard Adleman 在1977年提出，并以其三位发明人的名字命名。</p><h2 id="RSA-算法流程"><a href="#RSA-算法流程" class="headerlink" title="RSA 算法流程"></a>RSA 算法流程</h2><h4 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h4><ol><li>选择两个大质数 $ p $ 和 $ q $，计算它们的乘积 $ n &#x3D; p q $。</li><li>计算欧拉函数 $ \phi(n) &#x3D; (p-1)(q-1) $。</li><li>选择一个整数 $ e $，使得 $ 1 &lt; e &lt; \phi(n) $ 且 $ e $ 与 $ \phi(n) $ 互质。</li><li>计算 $ e $ 在模 $ \phi $ 下的逆元 $ d $，即求出 $ d $ 使得 $ e d \equiv 1 \pmod{\phi(n)} $ （拓展欧几里得算法）。</li><li>公钥为 $ (e, n) $，私钥为 $ (d, n) $。</li></ol><h4 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h4><p>加密消息 $ m $ ，要求 $ 0 &lt; m &lt; n $，计算密文 $ c &#x3D; m^e \pmod{n} $。</p><h4 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h4><p>解密消息 $ c $ ，计算明文 $ m &#x3D; c^d \pmod{n} $。</p><h4 id="正确性验证"><a href="#正确性验证" class="headerlink" title="正确性验证"></a>正确性验证</h4><p>$ m^{\phi(n)} \equiv 1 \pmod{n} $ （费马小定理）<br>$ ed \equiv 1 \pmod{\phi(n)} \iff ed&#x3D;1+k\phi(n) $ （同余式定义）<br>由上两式可得<br>$<br>c^d&#x3D; m^{ed}&#x3D; m^{1+k\phi(n)} &#x3D; (m^{\phi(n)})^km \equiv m \pmod{n}$</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><br>p = getPrime(<span class="hljs-number">512</span>)<br>q = getPrime(<span class="hljs-number">512</span>)<br>n = p * q<br>phi = (p-<span class="hljs-number">1</span>) * (q-<span class="hljs-number">1</span>)<br>e = <span class="hljs-number">65537</span><br>d = <span class="hljs-built_in">pow</span>(e, -<span class="hljs-number">1</span>, phi)<br>m = bytes_to_long(<span class="hljs-string">b&quot;plaintext&quot;</span>)<br>c = <span class="hljs-built_in">pow</span>(m, e, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Enc:&quot;</span>, long_to_bytes(c))<br>m = <span class="hljs-built_in">pow</span>(c, d, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dec:&quot;</span>, long_to_bytes(m))<br></code></pre></td></tr></table></figure><h2 id="RSA-的安全性"><a href="#RSA-的安全性" class="headerlink" title="RSA 的安全性"></a>RSA 的安全性</h2><p>RSA 的安全性基于大整数分解的难度。传统的教科书式 RSA 不能满足 IND-CPA 的安全性。在量子计算机中，大整数分解能被 Shor 算法在多项式时间内完成。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Crypto</category>
+      
+      <category>RSA</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
