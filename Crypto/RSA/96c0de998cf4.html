@@ -27,7 +27,7 @@
 <meta property="og:description" content="RSA 低解密指数攻击是指私钥持有者为了加快解密速度减少计算开销，生成密钥时选择较小的解密指数 $d$ ，然后用 $d$ 和 $\varphi$ 生成公钥 $e$ 。这样生成的 $d$ 较小， $e$ 一般较大接近 $N$ 。当解密指数 $d$ 满足一定条件时，可以通过一些数学方法来求解 $d$ 。 Wiener 攻击攻击条件： $d">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-28T18:30:31.929Z">
+<meta property="article:modified_time" content="2025-07-28T18:32:11.868Z">
 <meta property="article:author" content="AyakaHaruka">
 <meta property="article:tag" content="Crypto">
 <meta property="article:tag" content="RSA">
@@ -312,7 +312,7 @@ $$\begin{array}{c|ccccccccccc}\hline&1&y&y^2&x&xy&xy^2&xy^3&x^2&x^2y&x^2y^2&x^2y
 <p>其中 $\tau$ 是可优化参数且 $0\leqslant\tau\leqslant1$ 。通过优化参数 $k=0$ 和 $\tau=1-2\delta$ ，通过 $g^{BD.x}_{[u,i]}(xX,yY)$ 对于 $(u,i)\in\mathcal{I}_{BD,x}$ 和 $g^{BD.y}_{[u,j]}(xX,yY)$ 对于 $(u,j)\in\mathcal{I}_{BD,y1}$ 的系数向量作为行向量构造的矩阵 $B$ 提供的强 Boneh-Durfee 攻击可以使得当满足条件 $\delta\lt(1-1/\sqrt{2})=0.292\cdots$ 时攻击成功。但这么做矩阵 $B$ 可能不再是三角矩阵，所以需要进一步分析（ Herrmann-May 的优化矩阵）。</p>
 <h3 id="Herrmann-May-矩阵"><a href="#Herrmann-May-矩阵" class="headerlink" title="Herrmann-May 矩阵"></a>Herrmann-May 矩阵</h3><p>Herrmann 和 May 引入了一个新变量，将强 Boneh-Durfee 矩阵变换成了三角形：$$z:&#x3D;1+xy$$</p>
 <p>其上界为 $Z:=XY=N^{\delta+1/2}$ 。于是上述矩阵构造就变成了如下矩阵（$m=2,\kappa=1/2,\tau=1$）：</p>
-$$\begin{array}{c|}\hline&1&y&x&z&yz&y^2z&x^2&xz&z^2&yz^2&y^2z^2&y^3z^2\\\hline g^{BD.x}_{[0,0]}&e^2&\\g^{BD.y}_{[0,1]}&&Ye^2\\g^{BD.x}_{[1,0]}&&&Xe^2\\g^{BD.x}_{[1,1]}&&&-&Ze\\g^{BD.y}_{[1,1]}&-&&&-&YZe\\g^{BD.y}_{[1,2]}&&-&&&-&Y^2Ze\\g^{BD.x}_{[2,0]}&&&&&&&X^2e^2\\g^{BD.x}_{[2,1]}&&&&&&&-&XZe\\g^{BD.x}_{[2,2]}&&&&&&&-&-&Z^2\\g^{BD.y}_{[2,1]}&&&-&-&&&&-&-&YZ^2\\g^{BD.y}_{[2,2]}&-&&&-&-&&&&-&-&Y^2Z^2\\g^{BD.y}_{[2,3]}&&-&&&-&-&&&&-&-&Y^3Z^2\\\hline\end{array}$$
+$$\begin{array}{c|cccccccccccc}\hline&1&y&x&z&yz&y^2z&x^2&xz&z^2&yz^2&y^2z^2&y^3z^2\\\hline g^{BD.x}_{[0,0]}&e^2&\\g^{BD.y}_{[0,1]}&&Ye^2\\g^{BD.x}_{[1,0]}&&&Xe^2\\g^{BD.x}_{[1,1]}&&&-&Ze\\g^{BD.y}_{[1,1]}&-&&&-&YZe\\g^{BD.y}_{[1,2]}&&-&&&-&Y^2Ze\\g^{BD.x}_{[2,0]}&&&&&&&X^2e^2\\g^{BD.x}_{[2,1]}&&&&&&&-&XZe\\g^{BD.x}_{[2,2]}&&&&&&&-&-&Z^2\\g^{BD.y}_{[2,1]}&&&-&-&&&&-&-&YZ^2\\g^{BD.y}_{[2,2]}&-&&&-&-&&&&-&-&Y^2Z^2\\g^{BD.y}_{[2,3]}&&-&&&-&-&&&&-&-&Y^3Z^2\\\hline\end{array}$$
 
 <p>这样一来，所有单项式必然不会同时包含 $x$ 和 $y$ 。尽管线性化表达式 $z=1+xy$ 会丢失 $x$ 和 $y$ 的信息，但通过展开即可恢复这些信息。把矩阵变换成三角矩阵能让我们更轻松地分析它的结构。</p>
 <p>经典 Boneh-Durfee 攻击工具：<a target="_blank" rel="noopener" href="https://github.com/mimoo/RSA-and-LLL-attacks">RSA-and-LLL-attacks</a></p>
@@ -326,7 +326,7 @@ $$\begin{array}{c|}\hline&1&y&x&z&yz&y^2z&x^2&xz&z^2&yz^2&y^2z^2&y^3z^2\\\hline 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">gLSBs_x</span>(<span class="hljs-params">u,i,fLSBs,fBD,X,Y,m,kappa,tau</span>):<br>    <span class="hljs-keyword">return</span> X^(u-i) * fLSBs(X,Y)^i * (e*M)^(m-i)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gLSBs_y</span>(<span class="hljs-params">u,j,fLSBs,fBD,X,Y,m,kappa,tau</span>):<br>    k = m * kappa<br>    l = lLSBs(k,tau,j)<br>    <span class="hljs-keyword">return</span> Y^j * fLSBs(X,Y)^(u-l) * fBD(X,Y)^l*e^(m-u) * M^(m-u+l)<br></code></pre></td></tr></table></figure>
 
 <p>移位多项式在模 $(eM)^m$ 下与原方程有相同的根。于是构造矩阵 $B$ （ $m=2,\kappa=1/2,\tau=1 $ ）：</p>
-$$\begin{array}{c|}\hline&1&y&x&xy&xy^2&xy^3&x^2&x^2y&x^2y^2&x^2y^3&x^2y^4&x^2y^5\\\hline g^{LSBs.x}_{[0,0]}&(eM)^2&\\g^{LSBs.y}_{[0,1]}&&Y(eM)^2\\g^{LSBs.x}_{[1,0]}&&&X(eM)^2\\g^{LSBs.x}_{[1,1]}&-&&-&XYeM\\g^{LSBs.y}_{[1,1]}&&-&&-&XY^2eM\\g^{LSBs.y}_{[1,2]}&&&&&-&XY^3eM^2\\g^{LSBs.x}_{[2,0]}&&&&&&&X^2(eM)^2\\g^{LSBs.x}_{[2,1]}&&&-&&&&-&X^2YeM\\g^{LSBs.x}_{[2,2]}&-&&-&-&&&-&-&X^2Y^2\\g^{LSBs.y}_{[2,1]}&&-&&-&-&&&-&-&X^2Y^3\\g^{LSBs.y}_{[2,2]}&&&&&-&-&&&-&-&X^2Y^4M\\g^{LSBs.y}_{[2,3]}&&&&&&-&&&&-&-&X^2Y^5M^2\\\hline\end{array}$$
+$$\begin{array}{c|cccccccccccc}\hline&1&y&x&xy&xy^2&xy^3&x^2&x^2y&x^2y^2&x^2y^3&x^2y^4&x^2y^5\\\hline g^{LSBs.x}_{[0,0]}&(eM)^2&\\g^{LSBs.y}_{[0,1]}&&Y(eM)^2\\g^{LSBs.x}_{[1,0]}&&&X(eM)^2\\g^{LSBs.x}_{[1,1]}&-&&-&XYeM\\g^{LSBs.y}_{[1,1]}&&-&&-&XY^2eM\\g^{LSBs.y}_{[1,2]}&&&&&-&XY^3eM^2\\g^{LSBs.x}_{[2,0]}&&&&&&&X^2(eM)^2\\g^{LSBs.x}_{[2,1]}&&&-&&&&-&X^2YeM\\g^{LSBs.x}_{[2,2]}&-&&-&-&&&-&-&X^2Y^2\\g^{LSBs.y}_{[2,1]}&&-&&-&-&&&-&-&X^2Y^3\\g^{LSBs.y}_{[2,2]}&&&&&-&-&&&-&-&X^2Y^4M\\g^{LSBs.y}_{[2,3]}&&&&&&-&&&&-&-&X^2Y^5M^2\\\hline\end{array}$$
 
 <p>如下是魔改 <a target="_blank" rel="noopener" href="https://github.com/mimoo/RSA-and-LLL-attacks">RSA-and-LLL-attacks</a> 代码的弱化版带 LSB 的 Boneh-Durfee 攻击（弱化版是指由于我的代码并没有实现论文算法的全部细节，导致 $\delta$ 的上界会比论文中所说的 $0.368$ 小一点，大概在 $0.33$ 左右， $\varepsilon$ 也是，约 $0.17$ ），强化版代码可以根据论文完整思路自行实现。</p>
 <p>Sagemath 代码：</p>
