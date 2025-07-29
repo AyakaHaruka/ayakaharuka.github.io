@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>格基本概念</title>
+    <link href="/Crypto/%E6%A0%BC%E5%AF%86%E7%A0%81/02a86b5a35de.html"/>
+    <url>/Crypto/%E6%A0%BC%E5%AF%86%E7%A0%81/02a86b5a35de.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="格的基本概念"><a href="#格的基本概念" class="headerlink" title="格的基本概念"></a>格的基本概念</h2>设 $V$ 是一个 $n$ 维线性空间， $\{\alpha_1,\alpha_2,\cdots,\alpha_n\}$ 是 $V$ 的一组基，则 $V$ 中任意向量 $v$ 可以唯一表示为这组基的线性组合： $$v=\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots+\lambda_n\alpha_n$$<p>设 $V$ 是定义在 $\mathbb{R}$ 上的一个 $m$ 维线性空间，$A=\{\alpha_1,\alpha_2,\cdots,\alpha_n\}$ 是 $V$ 的任意 $n(n\leqslant m)$ 个线性无关的向量，则由这 $n$ 个线性无关向量的整系数线性组合构成的集合就是一个<strong>格</strong>，记为 $L(A)$ ，即 $L(A)=\{\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots+\lambda_n\alpha_n\mid\lambda_i\in\mathbb{Z},1\leqslant i\leqslant n\}$ 。</p><ul><li>$A$ 称为格 $L$ 的一组<strong>基</strong>。</li><li>$m$ 是格 $L$ 的<strong>维度</strong>。</li><li>$n$ 是格 $L$ 的<strong>秩</strong>。</li></ul>设 $A=\{\alpha_1,\alpha_2,\cdots,\alpha_n\}^T$ 是格 $L$ 的一组基，$B=\{\beta_1,\beta_2,\cdots,\beta_r\}^T$ 是 $L$ 中任意 $r$ 个向量，则必然存在整系数 $\lambda_{ij}$ ，使得 $$\begin{cases}\beta_1=\lambda_{11}\alpha_1+\lambda_{12}\alpha_2+\cdots+\lambda_{1n}\alpha_n\\\beta_2=\lambda_{21}\alpha_1+\lambda_{22}\alpha_2+\cdots+\lambda_{2n}\alpha_n\\\quad\vdots\\\beta_r=\lambda_{r1}\alpha_1+\lambda_{r2}\alpha_2+\cdots+\lambda_{rn}\alpha_n\end{cases}$$记 $$\Lambda=\begin{pmatrix}\lambda_{11}&\lambda_{12}&\cdots&\lambda_{1n}\\\lambda_{21}&\lambda_{22}&\cdots&\lambda_{2n}\\\vdots&\vdots&\ddots&\vdots\\\lambda_{r1}&\lambda_{r2}&\cdots&\lambda_{rn}\end{pmatrix}$$则有 $$B=\Lambda A$$这样一来，格的运算就简化成矩阵运算了。<h2 id="格上困难问题"><a href="#格上困难问题" class="headerlink" title="格上困难问题"></a>格上困难问题</h2><p>以下是一些常见的格上的困难问题：</p><ul><li><strong>最短向量问题（Shortest Vector Problem，SVP）：</strong> 对于给定格 $L$ 及其基底 $A$ ，求 $L$ 中长度最短的非零向量，即找到一个非零向量 $v\in L$ ，使得 $\forall u\in L$ 且 $u\neq 0$ ，有 $||v||\leq||u||$ 。</li><li><strong>最近向量问题（Closest Vector Problem，CVP）：</strong> 对于给定格 $L$ 及其基底 $A$ ，求 $L$ 中距离给定向量 $b\in\mathbb{R}^m$ 最近的非零向量，即找到一个非零向量 $v\in L$ ，使得 $\forall u\in L$ 且 $u\neq 0$ ，有 $||b-v||\leq||b-u||$ 。</li></ul><p>上述问题都是 NPC 问题，目前没有多项式时间的算法来求解，通常用 LLL 算法或 BKZ 算法来求解。</p><h2 id="Hermite-定理"><a href="#Hermite-定理" class="headerlink" title="Hermite 定理"></a>Hermite 定理</h2><p>Hermite 定理确定了一个格中最短向量的上界。<br><strong>Hermite 定理：</strong> 对 $n$ 维的格 $L$，都包含一个非零向量 $v \in L$，满足：$||v||\leqslant\sqrt n\det(L)^{1&#x2F;n}$。</p>现定义 Hermite 常数 $\gamma_n$ : 由 Hermite 定理可知，$L$ 必定包含非零向量 $v$ 满足 $$||v||^2\leqslant\gamma_n\det(L)^{2/n}$$其中 $\gamma_n=\sqrt n$ ，我们有一个更紧的界：$$\frac{n}{2\pi e}\leqslant \gamma_n\leqslant\frac{n}{\pi e}$$ 解题时构造格基时，可以通过对格基的某一行或者列配一些系数，使得构造的最短向量的长度接近该上界，可以使得求解的值更精确。]]></content>
+    
+    
+    <categories>
+      
+      <category>Crypto</category>
+      
+      <category>格密码</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Crypto</tag>
+      
+      <tag>Lattice</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>低解密指数攻击</title>
     <link href="/Crypto/RSA/96c0de998cf4.html"/>
     <url>/Crypto/RSA/96c0de998cf4.html</url>
