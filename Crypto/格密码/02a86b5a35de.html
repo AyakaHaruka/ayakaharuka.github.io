@@ -27,7 +27,7 @@
 <meta property="og:description" content="格的基本概念设 $V$ 是一个 $n$ 维线性空间， $\{\alpha_1,\alpha_2,\cdots,\alpha_n\}$ 是 $V$ 的一组基，则 $V$ 中任意向量 $v$ 可以唯一表示为这组基的线性组合： $$v&#x3D;\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots+\lambda_n\alpha_n$$  设 $V$ 是定义在 $\mathbb{R">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-29T12:51:39.398Z">
+<meta property="article:modified_time" content="2025-07-30T17:17:52.490Z">
 <meta property="article:author" content="AyakaHaruka">
 <meta property="article:tag" content="Crypto">
 <meta property="article:tag" content="Lattice">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          636 字
+          768 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -310,13 +310,19 @@
 <li><strong>最短向量问题（Shortest Vector Problem，SVP）：</strong> 对于给定格 $L$ 及其基底 $A$ ，求 $L$ 中长度最短的非零向量，即找到一个非零向量 $v\in L$ ，使得 $\forall u\in L$ 且 $u\neq 0$ ，有 $||v||\leq||u||$ 。</li>
 <li><strong>最近向量问题（Closest Vector Problem，CVP）：</strong> 对于给定格 $L$ 及其基底 $A$ ，求 $L$ 中距离给定向量 $b\in\mathbb{R}^m$ 最近的非零向量，即找到一个非零向量 $v\in L$ ，使得 $\forall u\in L$ 且 $u\neq 0$ ，有 $||b-v||\leq||b-u||$ 。</li>
 </ul>
-<p>上述问题都是 NPC 问题，目前没有多项式时间的算法来求解，通常用 LLL 算法或 BKZ 算法来求解。</p>
+<p>上述问题都是 NP-hard 问题，目前没有多项式时间的算法来求解，通常用 LLL 算法或 BKZ 算法来求解。</p>
 <h2 id="Hermite-定理"><a href="#Hermite-定理" class="headerlink" title="Hermite 定理"></a>Hermite 定理</h2><p>Hermite 定理确定了一个格中最短向量的上界。<br><strong>Hermite 定理：</strong> 对 $n$ 维的格 $L$，都包含一个非零向量 $v \in L$，满足：$||v||\leqslant\sqrt n\det(L)^{1&#x2F;n}$。</p>
 现定义 Hermite 常数 $\gamma_n$ : 由 Hermite 定理可知，$L$ 必定包含非零向量 $v$ 满足 $$||v||^2\leqslant\gamma_n\det(L)^{2/n}$$
 
 其中 $\gamma_n=\sqrt n$ ，我们有一个更紧的界：$$\frac{n}{2\pi e}\leqslant \gamma_n\leqslant\frac{n}{\pi e}$$ 
 
+<p><strong>高斯启发式：</strong> 对于 $n$ 维格 $L$ ，高斯期望的最短向量长度是 $$\sigma(L)=\sqrt{\dfrac{n}{2\pi\text{e}}}\det(L)^{1/n}$$ 
+高斯启发式说明，对于确定的 $\varepsilon\gt0$ ，当 $n$ 足够大时的 $n$ 维格 $L$ 的最短向量 $v_{\min}$ 都满足 $$(1-\varepsilon)\sigma(L)\leqslant||v_{\min}||\leqslant(1+\varepsilon)\sigma(L)$$
+
+LLL 算法能确保找到至少1个满足 Hermite 定理上界的向量，但不一定能达到 Hermite 常数 $\gamma_n$ 的最优界。
 解题时构造格基时，可以通过对格基的某一行或者列配一些系数，使得构造的最短向量的长度接近该上界，可以使得求解的值更精确。
+</p>
+<p>与此相关还有 <strong>Minkowski 定理</strong>和 <strong>Hadamard 不等式</strong>。</p>
 
                 
               </div>
